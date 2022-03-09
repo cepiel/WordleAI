@@ -1,0 +1,2 @@
+# WordleAI
+Wordle solving algorithm
