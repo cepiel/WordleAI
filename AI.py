@@ -4,34 +4,50 @@ from words import *
 from colorama import init, Back, Fore
 from termcolor import colored
 
-answer = ""
-num_guesses = 0
-wordle_len = 0
-words_guessed = []
-blacklisted = set()
+# answer = ""
+# num_guesses = 0
+# wordle_len = 0
+# words_guessed = []
+# blacklisted = set()
 
-def init_wordle():
+def init_wordle(num_vowels):
     global wordle_len 
     global answer
-    init(autoreset=True)
+    global num_guesses
+    global words_guessed
+    global blacklisted
+    answer = ""
+    num_guesses = 0
+    words_guessed = []
+    blacklisted = set()
     wordle_len = len(word_list)
+    
     # Randomly pick a word from the wordle dictionary
     answer = word_list[random.randint(0,wordle_len-1)]
-    print(f'The answer is: {answer}' )
-    play()
+    #print(f'The answer is: {answer}' )
+    return play(num_vowels)
     
-def play():    
+    
+def play(num_vowels):    
     # For the first guess, pick a random word with 3+ vowels
-    first_guess = find_word_with_vowels(3)
-    
+    first_guess = find_word_with_vowels(num_vowels)
+    print(f'First guess: {first_guess}')
     guess_colors = guess_word(first_guess) 
-    print_guess(guess_colors)
+    #print_guess(guess_colors)
 
+    return keep_guessing(guess_colors)
+    
+        
+def keep_guessing(guess_colors):
     while True:
         next_word = pick_next_word(guess_colors)
         guess_colors = guess_word(next_word) 
-        print_guess(guess_colors)
-    
+        if all(color == "green" for color in guess_colors.values()):
+            return num_guesses
+        #else: print_guess(guess_colors)
+        
+        
+        
 def print_guess(guess_colors):
     for idx, color in enumerate(guess_colors):
         if guess_colors[idx] == "black": 
@@ -66,16 +82,16 @@ def guess_word(guess):
     num_guesses += 1
     words_guessed.append(guess)
     
-    print(f'Guess #{num_guesses}: {guess}')
+    #print(f'Guess #{num_guesses}: {guess}')
 
     if guess is answer:
         for idx, g in enumerate(guess):
             guess_colors[idx] = "green"
-        print("Correct!")
-        print_guess(guess_colors)
-        quit()
+        #print("Correct!")
+        #print_guess(guess_colors)
+        return guess_colors
     else: 
-        print("Incorrect. Guess again.")
+        #print("Incorrect. Guess again.")
         for idx, g in enumerate(guess):
             if guess[idx] == answer[idx]: 
                 guess_colors[idx] = "green"
@@ -140,5 +156,23 @@ def check_yellow_and_green(guess_colors, word, last_word_guessed):
     return True
 
 
-init_wordle()
-play()
+# init_wordle()
+
+vowel_count = 2
+max_vowel_count = 4
+max_data_count = 1
+init(autoreset=True)
+
+while vowel_count <= max_vowel_count:
+    
+    data_count = 0
+    num_guesses_data = []
+    while data_count < max_data_count:
+        data_count+=1
+        num_guesses = init_wordle(vowel_count)
+        num_guesses_data.append(num_guesses)
+        
+    added_guesses = sum(num_guesses_data)
+    average = added_guesses/max_data_count
+    print(f'In {max_data_count} trials, using a first guess with {vowel_count} vowels, average # of guesses to find the answer was: {average}')
+    vowel_count+=1
