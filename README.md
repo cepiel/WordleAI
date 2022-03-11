@@ -19,3 +19,6 @@ The data collection algorithm conducts trials a programmable amount of times, in
 
 ## Play Wordle 
 This mode allows you to play traditional Wordle in the command line! You will be asked to input your guesses, and you have 6 guesses to get to the right answer. You will receive colored positional clues for each guess. It will also validate your guesses to ensure they are actual 5 letter words in the dictionary. Play by running `play_wordle.py`. 
+
+## Setup
+You may need to run `pip install colorama` and `pip install termcolor` to download the colored text dependencies before you run the apps.
