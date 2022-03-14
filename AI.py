@@ -72,7 +72,6 @@ def find_word_with_vowels(num_vowels):
 def guess_word(guess):
     global words_guessed
     global num_guesses 
-    global answer
     global blacklisted
     guess_colors = {
         0: "",
