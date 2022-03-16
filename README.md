@@ -1,9 +1,11 @@
 # Wordle
-This program has 3 components. The primary one is a Wordle AI, which plays Wordle against itself and intelligently guesses the answer.
+This program has 4 components. The primary one is a Wordle AI, which plays Wordle against itself and intelligently guesses the answer.
 
 The second is a means of data collection, which runs multiple trials Wordle AI with different strategies to benchmark the success rate. 
 
 The third lets you play Wordle traditionally, in the command line. 
+
+The fourth is a Wordle Tutorial, which is a commented guided walkthrough of how to make the Wordle AI. It is designed for beginner programmers, to give hints and ideas on how to develop a Wordle AI on their own. Find this in `wordle_tutorial.py`.
 
 ## Wordle AI
 The AI picks a word from the dictionary, and then tries to intelligently solve it, using the colored positional clues as hints. For those unfamiliar, Wordle colors each of the 5 letters of your guess one of three colors. 
@@ -19,6 +21,9 @@ The data collection algorithm conducts trials a programmable amount of times, in
 
 ## Play Wordle 
 This mode allows you to play traditional Wordle in the command line! You will be asked to input your guesses, and you have 6 guesses to get to the right answer. You will receive colored positional clues for each guess. It will also validate your guesses to ensure they are actual 5 letter words in the dictionary. Play by running `play_wordle.py`. 
+
+## Wordle Tutorial
+This is a Wordle Tutorial, which is a commented, guided walkthrough of how to make the Wordle AI. Modeled after school or university programming projects, it is designed for beginner programmers, to give hints and ideas on how to develop a Wordle AI on their own. Find this in `wordle_tutorial.py`.
 
 ## Setup
 You may need to run `pip install colorama` and `pip install termcolor` to download the colored text dependencies before you run the apps.
